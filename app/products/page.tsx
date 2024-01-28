@@ -9,19 +9,22 @@ async function Products() {
   const { products } = await getAllProducts();
 
   return (
-    <div>
+    <div className="grid grid-cols-4 gap-4">
       {products.map((product: Product) => (
-        <Link href={`/products/${product.id}`} key={product.id}>
-          <Image
-            alt={product.name}
-            src={product.image}
-            width={400}
-            height={300}
-          />
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <p>{formatCurrency(product.price)}</p>
-        </Link>
+        <div key={product.id} className="rounded-lg bg-slate-800">
+          <Link href={`/products/${product.id}`}>
+            <Image
+              alt={product.name}
+              src={product.image}
+              width={400}
+              height={300}
+              className="rounded-t-lg"
+            />
+            <h2 className="font-bold">{product.name}</h2>
+            <p>{formatCurrency(product.price)}</p>
+            <p>{product.description}</p>
+          </Link>
+        </div>
       ))}
     </div>
   );
