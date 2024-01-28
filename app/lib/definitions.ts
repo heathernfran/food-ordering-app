@@ -23,6 +23,8 @@ export type Cart = { [id: string]: ProductInCart };
 
 export type CartState = {
   cart: Cart | {};
+  totalCost: number;
+  totalQuantity: number;
 };
 
 export type CartContextType = {
@@ -39,4 +41,10 @@ interface DeleteProductAction {
   type: "DELETE_PRODUCT";
   id: string;
 }
-export type CartAction = AddProductAction | DeleteProductAction;
+interface UpdateTotalsAction {
+  type: "UPDATE_TOTALS";
+}
+export type CartAction =
+  | AddProductAction
+  | DeleteProductAction
+  | UpdateTotalsAction;

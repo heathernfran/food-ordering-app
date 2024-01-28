@@ -7,7 +7,7 @@ import LineItem from "@/app/ui/cart/line-item";
 
 export default function AllItems() {
   const {
-    state: { cart },
+    state: { cart, totalCost },
   } = useContext(CartContext) as CartContextType;
 
   const entries = Object.entries(cart);
@@ -21,6 +21,7 @@ export default function AllItems() {
       ) : (
         <div>Cart is empty</div>
       )}
+      <p>Total cost: {totalCost}</p>
     </div>
   );
 }

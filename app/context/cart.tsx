@@ -6,10 +6,13 @@ import type {
   CartAction,
   CartState,
   NewProduct,
+  ProductInCart,
 } from "@/app/lib/definitions";
 
 const initialState = {
   cart: {},
+  totalCost: 0,
+  totalQuantity: 0,
 };
 
 function cartReducer(state: CartState, action: CartAction) {
@@ -29,9 +32,8 @@ function cartReducer(state: CartState, action: CartAction) {
         cart: { ...state.cart, ...nextProduct },
       };
     case "DELETE_PRODUCT":
-      const { id } = action;
       const nextCart = Object.entries(state.cart)
-        .filter(([key]) => key !== id)
+        .filter(([key]) => key !== action.id)
         .reduce((nextState: Cart, [key, value]) => {
           nextState[key] = value;
           return nextState;
@@ -39,6 +41,14 @@ function cartReducer(state: CartState, action: CartAction) {
       return {
         ...state,
         cart: nextCart,
+      };
+    case "UPDATE_TOTALS":
+      const nextTotalQuantity = calculateTotalValues(state.cart, "quantity");
+      const nextTotalCost = calculateTotalValues(state.cart, "cost");
+      return {
+        ...state,
+        totalCost: nextTotalCost,
+        totalQuantity: nextTotalQuantity,
       };
     default:
       throw Error(`Unknown action: ${action}`);
@@ -55,6 +65,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       type: "ADD_PRODUCT",
       product,
     });
+    dispatch({ type: "UPDATE_TOTALS" });
   }
 
   function deleteFromCart(id: string) {
@@ -62,6 +73,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       type: "DELETE_PRODUCT",
       id,
     });
+    dispatch({ type: "UPDATE_TOTALS" });
   }
 
   return (
@@ -76,4 +88,14 @@ function calculateQuantity(id: string, cart: Cart) {
     return cart[id].quantity + 1;
   }
   return 1;
+}
+
+function calculateTotalValues(
+  cart: Record<string, ProductInCart>,
+  property: keyof ProductInCart
+): number {
+  return Object.values(cart).reduce((total, currentObject) => {
+    total += Number(currentObject[property]);
+    return total;
+  }, 0);
 }
