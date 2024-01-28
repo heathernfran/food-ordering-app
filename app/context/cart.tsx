@@ -6,8 +6,8 @@ import type {
   CartAction,
   CartState,
   NewProduct,
-  ProductInCart,
 } from "@/app/lib/definitions";
+import { calculateQuantity, calculateTotalValues } from "@/app/lib/utils";
 
 const initialState = {
   cart: {},
@@ -18,7 +18,7 @@ const initialState = {
 function cartReducer(state: CartState, action: CartAction) {
   switch (action.type) {
     case "ADD_PRODUCT":
-      const quantity = calculateQuantity(action.product.id, state.cart);
+      const quantity = calculateQuantity(state.cart, action.product.id);
       const cost = action.product.price * quantity;
       const nextProduct = {
         [action.product.id]: {
@@ -81,21 +81,4 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       {children}
     </CartContext.Provider>
   );
-}
-
-function calculateQuantity(id: string, cart: Cart) {
-  if (cart.hasOwnProperty(id)) {
-    return cart[id].quantity + 1;
-  }
-  return 1;
-}
-
-function calculateTotalValues(
-  cart: Record<string, ProductInCart>,
-  property: keyof ProductInCart
-): number {
-  return Object.values(cart).reduce((total, currentObject) => {
-    total += Number(currentObject[property]);
-    return total;
-  }, 0);
 }

@@ -1,5 +1,61 @@
 import { describe, expect, test } from "vitest";
-import { formatCurrency } from "./utils";
+import {
+  calculateQuantity,
+  calculateTotalValues,
+  formatCurrency,
+} from "./utils";
+
+describe("calculateQuantity()", () => {
+  test("returns the updated quantity for a product in the cart", () => {
+    const mockCart = {
+      "1": {
+        id: "1",
+        name: "Product 1",
+        price: 600,
+        image: "/path/to/image.jpg",
+        cost: 1200,
+        quantity: 2,
+      },
+    };
+
+    expect(calculateQuantity(mockCart, "1")).toBe(3);
+  });
+
+  test("returns quantity of 1 when product is not in the cart", () => {
+    const mockCart = {};
+
+    expect(calculateQuantity(mockCart, "2")).toBe(1);
+  });
+});
+
+describe("calculateTotalValues()", () => {
+  const mockCart = {
+    "1": {
+      id: "1",
+      name: "Product 1",
+      price: 600,
+      image: "/path/to/image.jpg",
+      cost: 1200,
+      quantity: 2,
+    },
+    "2": {
+      id: "2",
+      name: "Product 2",
+      price: 400,
+      image: "/path/to/image.jpg",
+      cost: 1200,
+      quantity: 3,
+    },
+  };
+
+  test("returns the updated value for total quantity of products in the cart", () => {
+    expect(calculateTotalValues(mockCart, "quantity")).toBe(5);
+  });
+
+  test("returns the updated value for total cost of products in the cart", () => {
+    expect(calculateTotalValues(mockCart, "cost")).toBe(2400);
+  });
+});
 
 describe("formatCurrency()", () => {
   test("formats USD currency correctly", () => {
