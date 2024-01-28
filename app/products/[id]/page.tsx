@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import { getProductById } from "@/app/lib/actions";
+import AddToCartButton from "@/app/ui/products/add-to-cart-button";
+import BackButton from "@/app/ui/products/back-button";
 
 async function ProductById({ id }: { id: string }) {
   const product = await getProductById(id);
@@ -12,6 +14,7 @@ async function ProductById({ id }: { id: string }) {
       <p>{product.price}</p>
       <p>{product.description}</p>
       <p>Nutrition: {product.calorie}</p>
+      <AddToCartButton product={product} />
     </div>
   );
 }
@@ -19,6 +22,7 @@ async function ProductById({ id }: { id: string }) {
 export default function Page({ params: { id } }: { params: { id: string } }) {
   return (
     <div>
+      <BackButton />
       <Suspense fallback={<div>Loading...</div>}>
         <ProductById id={id} />
       </Suspense>
