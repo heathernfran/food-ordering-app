@@ -23,12 +23,12 @@ describe("<LineItem />", () => {
   test("renders the quantity correctly", () => {
     render(<LineItem product={mockProduct} />);
 
-    expect(screen.getByText("Quantity: 2")).toBeTruthy();
+    expect(screen.getByText("(2)")).toBeTruthy();
   });
 
   test("renders the cost correct", () => {
     render(<LineItem product={mockProduct} />);
 
-    expect(screen.getByText("Cost: $20.00")).toBeTruthy();
+    expect(screen.getByText("$20.00")).toBeTruthy();
   });
 });

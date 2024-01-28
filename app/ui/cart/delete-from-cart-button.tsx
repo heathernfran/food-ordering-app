@@ -11,5 +11,9 @@ export default function DeleteFromCartButton({ id }: { id: string }) {
     deleteFromCart(id);
   }
 
-  return <button onClick={handleClick}>Delete</button>;
+  return (
+    <button onClick={handleClick} className="inline-block p-2">
+      Delete
+    </button>
+  );
 }
