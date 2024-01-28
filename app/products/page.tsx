@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getAllProducts } from "@/app/lib/actions";
 import type { Product } from "@/app/lib/definitions";
+import { formatCurrency } from "@/app/lib/utils";
 
 async function Products() {
   const { products } = await getAllProducts();
@@ -19,7 +20,7 @@ async function Products() {
           />
           <h2>{product.name}</h2>
           <p>{product.description}</p>
-          <p>{product.price}</p>
+          <p>{formatCurrency(product.price)}</p>
         </Link>
       ))}
     </div>

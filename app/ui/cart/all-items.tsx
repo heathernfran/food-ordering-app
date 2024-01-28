@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { CartContext } from "@/app/context/cart";
 import type { CartContextType } from "@/app/lib/definitions";
 import LineItem from "@/app/ui/cart/line-item";
+import { formatCurrency } from "@/app/lib/utils";
 
 export default function AllItems() {
   const {
@@ -21,7 +22,7 @@ export default function AllItems() {
       ) : (
         <div>Cart is empty</div>
       )}
-      <p>Total cost: {totalCost}</p>
+      <p>Total cost: {formatCurrency(totalCost)}</p>
     </div>
   );
 }

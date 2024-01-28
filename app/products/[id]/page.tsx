@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getProductById } from "@/app/lib/actions";
 import AddToCartButton from "@/app/ui/products/add-to-cart-button";
 import BackButton from "@/app/ui/products/back-button";
+import { formatCurrency } from "@/app/lib/utils";
 
 async function ProductById({ id }: { id: string }) {
   const product = await getProductById(id);
@@ -11,7 +12,7 @@ async function ProductById({ id }: { id: string }) {
     <div>
       <Image alt={product.name} src={product.image} width={400} height={300} />
       <h1>{product.name}</h1>
-      <p>{product.price}</p>
+      <p>{formatCurrency(product.price)}</p>
       <p>{product.description}</p>
       <p>Nutrition: {product.calorie}</p>
       <AddToCartButton product={product} />
