@@ -7,7 +7,7 @@ export default function LineItem({ product }: { product: ProductInCart }) {
   const { id, name, image, cost, quantity } = product;
 
   return (
-    <div>
+    <div data-testid="line-item">
       <Image alt={name} src={image} width={100} height={100} />
       <h2>Name: {name}</h2>
       <p>Quantity: {quantity}</p>

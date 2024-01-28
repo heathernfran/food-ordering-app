@@ -22,7 +22,7 @@ export default function AllItems() {
       ) : (
         <div>Cart is empty</div>
       )}
-      <p>Total cost: {formatCurrency(totalCost)}</p>
+      <p data-testid="total-cost">Total cost: {formatCurrency(totalCost)}</p>
     </div>
   );
 }
