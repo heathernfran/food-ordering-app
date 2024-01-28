@@ -7,7 +7,11 @@ import type {
   CartState,
   NewProduct,
 } from "@/app/lib/definitions";
-import { calculateQuantity, calculateTotalValues } from "@/app/lib/utils";
+import {
+  calculateQuantity,
+  calculateTotalValues,
+  deleteProductFromCart,
+} from "@/app/lib/utils";
 
 const initialState = {
   cart: {},
@@ -32,12 +36,7 @@ function cartReducer(state: CartState, action: CartAction) {
         cart: { ...state.cart, ...nextProduct },
       };
     case "DELETE_PRODUCT":
-      const nextCart = Object.entries(state.cart)
-        .filter(([key]) => key !== action.id)
-        .reduce((nextState: Cart, [key, value]) => {
-          nextState[key] = value;
-          return nextState;
-        }, {});
+      const nextCart = deleteProductFromCart(state.cart, action.id);
       return {
         ...state,
         cart: nextCart,

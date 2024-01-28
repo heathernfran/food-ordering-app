@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import {
   calculateQuantity,
   calculateTotalValues,
+  deleteProductFromCart,
   formatCurrency,
 } from "./utils";
 
@@ -54,6 +55,41 @@ describe("calculateTotalValues()", () => {
 
   test("returns the updated value for total cost of products in the cart", () => {
     expect(calculateTotalValues(mockCart, "cost")).toBe(2400);
+  });
+});
+
+describe("deleteProductFromCart()", () => {
+  test("returns a copy of the cart without the deleted product", () => {
+    const mockCart = {
+      "1": {
+        id: "1",
+        name: "Product 1",
+        price: 600,
+        image: "/path/to/image.jpg",
+        cost: 1200,
+        quantity: 2,
+      },
+      "2": {
+        id: "2",
+        name: "Product 2",
+        price: 400,
+        image: "/path/to/image.jpg",
+        cost: 1200,
+        quantity: 3,
+      },
+    };
+    const result = {
+      "2": {
+        id: "2",
+        name: "Product 2",
+        price: 400,
+        image: "/path/to/image.jpg",
+        cost: 1200,
+        quantity: 3,
+      },
+    };
+
+    expect(deleteProductFromCart(mockCart, "1")).toEqual(result);
   });
 });
 

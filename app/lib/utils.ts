@@ -17,6 +17,15 @@ export function calculateTotalValues(
   }, 0);
 }
 
+export function deleteProductFromCart(cart: Cart, productId: string) {
+  return Object.entries(cart)
+    .filter(([id]) => id !== productId)
+    .reduce((nextState: Cart, [id, product]) => {
+      nextState[id] = product;
+      return nextState;
+    }, {});
+}
+
 export function formatCurrency(amount: number) {
   return (amount / 100).toLocaleString("en-US", {
     style: "currency",
