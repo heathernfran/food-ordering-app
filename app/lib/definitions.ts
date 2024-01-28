@@ -14,7 +14,12 @@ export type NewProduct = {
   image: string;
 };
 
-export type Cart = { [id: string]: NewProduct };
+export type ProductInCart = NewProduct & {
+  cost: number
+  quantity: number;
+};
+
+export type Cart = { [id: string]: ProductInCart };
 
 export type CartContextType = {
   cart: Cart;

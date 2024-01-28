@@ -9,9 +9,11 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState({});
 
   function addToCart(product: NewProduct) {
+    const quantity = calculateQuantity(product.id, cart);
+    const cost = product.price * quantity;
     setCart((prevState) => ({
       ...prevState,
-      [product.id]: product,
+      [product.id]: { ...product, cost, quantity },
     }));
   }
 
@@ -31,4 +33,11 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       {children}
     </CartContext.Provider>
   );
+}
+
+function calculateQuantity(id: string, cart: Cart) {
+  if (cart.hasOwnProperty(id)) {
+    return cart[id].quantity + 1;
+  }
+  return 1;
 }
