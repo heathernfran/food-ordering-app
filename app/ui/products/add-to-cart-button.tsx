@@ -1,7 +1,11 @@
 "use client";
 
 import { CartContext } from "@/app/context/cart";
-import type { CartContextType, NewProduct, Product } from "@/app/lib/definitions";
+import type {
+  CartContextType,
+  NewProduct,
+  Product,
+} from "@/app/lib/definitions";
 import { useContext } from "react";
 
 export default function AddToCartButton({ product }: { product: Product }) {
@@ -18,5 +22,14 @@ export default function AddToCartButton({ product }: { product: Product }) {
     addToCart(newProduct);
   }
 
-  return <button onClick={handleClick}>Add to Cart</button>;
+  return (
+    <div className="flex justify-center">
+      <button
+        onClick={handleClick}
+        className="bg-slate-600 px-4 py-2 rounded-full font-bold"
+      >
+        Add to Cart
+      </button>
+    </div>
+  );
 }

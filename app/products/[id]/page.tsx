@@ -10,11 +10,18 @@ async function ProductById({ id }: { id: string }) {
 
   return (
     <div>
-      <Image alt={product.name} src={product.image} width={400} height={300} />
-      <h1>{product.name}</h1>
+      <div className="flex justify-center">
+        <Image
+          alt={product.name}
+          src={product.image}
+          width={400}
+          height={300}
+        />
+      </div>
+      <h1 className="text-center text-2xl">{product.name}</h1>
       <p>{formatCurrency(product.price)}</p>
       <p>{product.description}</p>
-      <p>Nutrition: {product.calorie}</p>
+      <p>Nutrition: {product.calorie} calories</p>
       <AddToCartButton product={product} />
     </div>
   );
@@ -25,7 +32,9 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
     <div>
       <BackButton />
       <Suspense fallback={<div>Loading...</div>}>
-        <ProductById id={id} />
+        <div className="flex justify-center items-center">
+          <ProductById id={id} />
+        </div>
       </Suspense>
     </div>
   );
