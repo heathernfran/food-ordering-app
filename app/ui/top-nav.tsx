@@ -11,9 +11,21 @@ export default function TopNav() {
   } = useContext(CartContext) as CartContextType;
 
   return (
-    <div>
-      <Link href="/">Home</Link>
-      <Link href="/cart">Cart: {totalQuantity}</Link>
+    <div className="flex justify-between items-center bg-slate-900 h-12">
+      <div className="flex flex-row-reverse mx-10">
+        <Link href="/">Home</Link>
+        <Link href="/products">
+          <span className="text-green-300 font-bold">Burgers</span>
+        </Link>
+      </div>
+      <div className="flex flex-row mx-10">
+        <Link href="/cart">
+          Cart{" "}
+          <span className="absolute top-[5px] right-[10px] size-[25px] rounded-[50%] text-center bg-green-300 text-black">
+            {totalQuantity}
+          </span>
+        </Link>
+      </div>
     </div>
   );
 }
