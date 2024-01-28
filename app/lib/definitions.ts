@@ -15,14 +15,28 @@ export type NewProduct = {
 };
 
 export type ProductInCart = NewProduct & {
-  cost: number
+  cost: number;
   quantity: number;
 };
 
 export type Cart = { [id: string]: ProductInCart };
 
+export type CartState = {
+  cart: Cart | {};
+};
+
 export type CartContextType = {
-  cart: Cart;
+  state: CartState;
   addToCart: (product: NewProduct) => void;
   deleteFromCart: (id: string) => void;
 };
+
+interface AddProductAction {
+  type: "ADD_PRODUCT";
+  product: NewProduct;
+}
+interface DeleteProductAction {
+  type: "DELETE_PRODUCT";
+  id: string;
+}
+export type CartAction = AddProductAction | DeleteProductAction;

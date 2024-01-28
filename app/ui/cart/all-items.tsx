@@ -6,7 +6,9 @@ import type { CartContextType } from "@/app/lib/definitions";
 import LineItem from "@/app/ui/cart/line-item";
 
 export default function AllItems() {
-  const { cart } = useContext(CartContext) as CartContextType;
+  const {
+    state: { cart },
+  } = useContext(CartContext) as CartContextType;
 
   const entries = Object.entries(cart);
 

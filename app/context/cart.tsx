@@ -1,35 +1,71 @@
 "use client";
 
-import { ReactNode, createContext, useState } from "react";
-import { Cart, NewProduct } from "@/app/lib/definitions";
+import { ReactNode, createContext, useReducer } from "react";
+import type {
+  Cart,
+  CartAction,
+  CartState,
+  NewProduct,
+} from "@/app/lib/definitions";
+
+const initialState = {
+  cart: {},
+};
+
+function cartReducer(state: CartState, action: CartAction) {
+  switch (action.type) {
+    case "ADD_PRODUCT":
+      const quantity = calculateQuantity(action.product.id, state.cart);
+      const cost = action.product.price * quantity;
+      const nextProduct = {
+        [action.product.id]: {
+          ...action.product,
+          cost,
+          quantity,
+        },
+      };
+      return {
+        ...state,
+        cart: { ...state.cart, ...nextProduct },
+      };
+    case "DELETE_PRODUCT":
+      const { id } = action;
+      const nextCart = Object.entries(state.cart)
+        .filter(([key]) => key !== id)
+        .reduce((nextState: Cart, [key, value]) => {
+          nextState[key] = value;
+          return nextState;
+        }, {});
+      return {
+        ...state,
+        cart: nextCart,
+      };
+    default:
+      throw Error(`Unknown action: ${action}`);
+  }
+}
 
 export const CartContext = createContext({});
 
 export default function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState({});
+  const [state, dispatch] = useReducer(cartReducer, initialState);
 
   function addToCart(product: NewProduct) {
-    const quantity = calculateQuantity(product.id, cart);
-    const cost = product.price * quantity;
-    setCart((prevState) => ({
-      ...prevState,
-      [product.id]: { ...product, cost, quantity },
-    }));
+    dispatch({
+      type: "ADD_PRODUCT",
+      product,
+    });
   }
 
   function deleteFromCart(id: string) {
-    setCart((prevState: Cart) =>
-      Object.keys(prevState)
-        .filter((key) => key !== id)
-        .reduce((nextState: Cart, key) => {
-          nextState[key] = prevState[key];
-          return nextState;
-        }, {})
-    );
+    dispatch({
+      type: "DELETE_PRODUCT",
+      id,
+    });
   }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, deleteFromCart }}>
+    <CartContext.Provider value={{ state, addToCart, deleteFromCart }}>
       {children}
     </CartContext.Provider>
   );
