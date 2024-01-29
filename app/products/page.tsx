@@ -9,7 +9,7 @@ async function Products() {
   const { products } = await getAllProducts();
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid gap-4 grid-template-columns">
       {products.map((product: Product) => (
         <div key={product.id} className="rounded-lg bg-slate-800">
           <Link href={`/products/${product.id}`}>
@@ -33,7 +33,6 @@ async function Products() {
 export default async function Page() {
   return (
     <>
-      <h1>All Products</h1>
       <Suspense fallback={<div>Loading...</div>}>
         <Products />
       </Suspense>
