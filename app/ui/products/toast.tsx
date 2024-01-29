@@ -1,6 +1,6 @@
 import { useToast } from "@/app/context/toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 
 export default function Toast({ message }: { message: string }) {
   const { isVisible, setIsVisible } = useToast();

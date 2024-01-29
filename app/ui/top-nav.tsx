@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useCart } from "@/app/context/cart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
+import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
 
 export default function TopNav() {
   const {
