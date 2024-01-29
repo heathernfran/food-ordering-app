@@ -13,13 +13,16 @@ async function Products() {
       {products.map((product: Product) => (
         <div key={product.id} className="rounded-lg bg-slate-800">
           <Link href={`/products/${product.id}`}>
-            <Image
-              alt={product.name}
-              src={product.image}
-              width={400}
-              height={300}
-              className="rounded-t-lg"
-            />
+            <div className="">
+              <Image
+                alt={product.name}
+                src={product.image}
+                width={400}
+                height={300}
+                style={{ objectFit: "cover" }}
+                className="rounded-t-lg w-[400px] h-[300px]"
+              />
+            </div>
             <h2 className="font-bold">{product.name}</h2>
             <p>{formatCurrency(product.price)}</p>
             <p>{product.description}</p>

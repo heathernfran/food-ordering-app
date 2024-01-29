@@ -14,7 +14,7 @@ export default function LineItem({ product }: { product: ProductInCart }) {
           src={image}
           width={100}
           height={100}
-          className="inline-block rounded-full"
+          className="inline-block rounded-full w-[100px] h-[100px] object-cover"
         />
         <h2 className="inline-block m-2">{name}</h2>
         <p className="inline-block">{`(${quantity})`}</p>
