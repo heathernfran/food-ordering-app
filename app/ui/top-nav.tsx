@@ -11,7 +11,7 @@ export default function TopNav() {
   } = useContext(CartContext) as CartContextType;
 
   return (
-    <div className="flex justify-between items-center bg-slate-900 h-12">
+    <div className="flex justify-between items-center sticky top-[0] bg-slate-900 h-12">
       <div className="flex flex-row-reverse mx-10">
         <Link href="/">Home</Link>
         <Link href="/products">
