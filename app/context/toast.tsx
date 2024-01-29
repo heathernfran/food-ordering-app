@@ -1,8 +1,13 @@
 "use client";
 
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
+import type { ToastContextType } from "@/app/lib/definitions";
 
 export const ToastContext = createContext({});
+
+export function useToast() {
+  return useContext(ToastContext) as ToastContextType;
+}
 
 export default function ToastProvider({ children }: { children: ReactNode }) {
   const [isVisible, setIsVisible] = useState(false);

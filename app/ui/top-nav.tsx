@@ -1,16 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useContext } from "react";
-import { CartContext } from "@/app/context/cart";
-import { CartContextType } from "@/app/lib/definitions";
+import { useCart } from "@/app/context/cart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faHouse } from "@fortawesome/free-solid-svg-icons";
 
 export default function TopNav() {
   const {
     state: { totalQuantity },
-  } = useContext(CartContext) as CartContextType;
+  } = useCart();
 
   return (
     <div className="flex justify-between items-center sticky top-[0] bg-slate-900 h-12">

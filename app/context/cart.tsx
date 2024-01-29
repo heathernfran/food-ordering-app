@@ -1,9 +1,9 @@
 "use client";
 
-import { ReactNode, createContext, useReducer } from "react";
+import { ReactNode, createContext, useContext, useReducer } from "react";
 import type {
-  Cart,
   CartAction,
+  CartContextType,
   CartState,
   NewProduct,
 } from "@/app/lib/definitions";
@@ -55,6 +55,10 @@ function cartReducer(state: CartState, action: CartAction) {
 }
 
 export const CartContext = createContext({});
+
+export function useCart() {
+  return useContext(CartContext) as CartContextType;
+}
 
 export default function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);

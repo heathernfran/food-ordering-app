@@ -1,13 +1,11 @@
 "use client";
 
-import { useContext } from "react";
-import { CartContext } from "@/app/context/cart";
-import type { CartContextType } from "@/app/lib/definitions";
+import { useCart } from "@/app/context/cart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 export default function DeleteFromCartButton({ id }: { id: string }) {
-  const { deleteFromCart } = useContext(CartContext) as CartContextType;
+  const { deleteFromCart } = useCart();
 
   function handleClick() {
     deleteFromCart(id);

@@ -1,15 +1,13 @@
 "use client";
 
-import { useContext } from "react";
-import { CartContext } from "@/app/context/cart";
-import type { CartContextType } from "@/app/lib/definitions";
+import { useCart } from "@/app/context/cart";
 import LineItem from "@/app/ui/cart/line-item";
 import { formatCurrency } from "@/app/lib/utils";
 
 export default function AllItems() {
   const {
     state: { cart, totalCost },
-  } = useContext(CartContext) as CartContextType;
+  } = useCart();
 
   const entries = Object.entries(cart);
 

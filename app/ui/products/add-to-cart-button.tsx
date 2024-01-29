@@ -1,19 +1,13 @@
 "use client";
 
-import { CartContext } from "@/app/context/cart";
-import type {
-  CartContextType,
-  NewProduct,
-  Product,
-  ToastContextType,
-} from "@/app/lib/definitions";
-import { useContext } from "react";
+import { useCart } from "@/app/context/cart";
+import type { NewProduct, Product } from "@/app/lib/definitions";
 import Toast from "@/app/ui/products/toast";
-import { ToastContext } from "@/app/context/toast";
+import { useToast } from "@/app/context/toast";
 
 export default function AddToCartButton({ product }: { product: Product }) {
-  const { addToCart } = useContext(CartContext) as CartContextType;
-  const { showToast } = useContext(ToastContext) as ToastContextType;
+  const { addToCart } = useCart();
+  const { showToast } = useToast();
 
   function handleClick() {
     const { id, name, price, image } = product;
