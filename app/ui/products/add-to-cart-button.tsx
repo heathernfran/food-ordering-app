@@ -5,13 +5,15 @@ import type {
   CartContextType,
   NewProduct,
   Product,
+  ToastContextType,
 } from "@/app/lib/definitions";
 import { useContext } from "react";
 import Toast from "@/app/ui/products/toast";
-import { toast } from "react-toastify";
+import { ToastContext } from "@/app/context/toast";
 
 export default function AddToCartButton({ product }: { product: Product }) {
   const { addToCart } = useContext(CartContext) as CartContextType;
+  const { showToast } = useContext(ToastContext) as ToastContextType;
 
   function handleClick() {
     const { id, name, price, image } = product;
@@ -22,7 +24,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
       image,
     };
     addToCart(newProduct);
-    toast(`Added ${name} to the cart!`);
+    showToast();
   }
 
   return (
@@ -33,7 +35,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
       >
         Add to Cart
       </button>
-      <Toast />
+      <Toast message={`Added ${product.name} to the cart!`} />
     </div>
   );
 }

@@ -48,3 +48,9 @@ export type CartAction =
   | AddProductAction
   | DeleteProductAction
   | UpdateTotalsAction;
+
+export type ToastContextType = {
+  isVisible: boolean;
+  setIsVisible: (isVisible: boolean) => void;
+  showToast: () => () => void;
+};
