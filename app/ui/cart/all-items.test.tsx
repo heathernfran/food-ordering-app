@@ -43,7 +43,7 @@ describe("<AllItems />", () => {
     );
 
     expect(screen.getByTestId("total-cost").textContent).toEqual(
-      "Total cost: $50.00"
+      "Total: $50.00"
     );
   });
 });

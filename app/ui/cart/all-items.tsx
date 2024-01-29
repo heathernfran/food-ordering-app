@@ -13,16 +13,18 @@ export default function AllItems() {
 
   const entries = Object.entries(cart);
 
+  if (entries.length <= 0) {
+    return <p className="text-center text-xl">Cart is empty</p>;
+  }
+
   return (
     <div>
-      {entries.length > 0 ? (
-        entries.map(([key, product]) => (
-          <LineItem key={key} product={product} />
-        ))
-      ) : (
-        <div>Cart is empty</div>
-      )}
-      <p data-testid="total-cost">Total cost: {formatCurrency(totalCost)}</p>
+      {entries.map(([key, product]) => (
+        <LineItem key={key} product={product} />
+      ))}
+      <p data-testid="total-cost" className="text-center text-xl">
+        Total: {formatCurrency(totalCost)}
+      </p>
     </div>
   );
 }
