@@ -1,11 +1,10 @@
-import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllProducts } from "@/app/lib/actions";
 import type { Product } from "@/app/lib/definitions";
 import { formatCurrency } from "@/app/lib/utils";
 
-async function Products() {
+export default async function Page() {
   const { products } = await getAllProducts();
 
   return (
@@ -30,15 +29,5 @@ async function Products() {
         </div>
       ))}
     </div>
-  );
-}
-
-export default async function Page() {
-  return (
-    <>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Products />
-      </Suspense>
-    </>
   );
 }
