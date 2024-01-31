@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/ui/globals.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import TopNav from "@/app/ui/top-nav";
 import CartProvider from "@/app/context/cart";
 import ToastProvider from "@/app/context/toast";

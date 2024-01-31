@@ -17,10 +17,10 @@ export default function AllItems() {
 
   return (
     <div>
-      {entries.map(([key, product]) => (
-        <LineItem key={key} product={product} />
+      {entries.map(([id, product]) => (
+        <LineItem key={id} product={product} />
       ))}
-      <p data-testid="total-cost" className="text-center text-xl">
+      <p data-testid="total-cost" className="text-right text-xl">
         Total: {formatCurrency(totalCost)}
       </p>
     </div>
