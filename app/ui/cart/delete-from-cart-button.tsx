@@ -12,7 +12,11 @@ export default function DeleteFromCartButton({ id }: { id: string }) {
   }
 
   return (
-    <button onClick={handleClick} className="inline-block p-2">
+    <button
+      data-testid="delete-button"
+      onClick={handleClick}
+      className="inline-block p-2"
+    >
       <FontAwesomeIcon icon={faTrashCan} />
     </button>
   );

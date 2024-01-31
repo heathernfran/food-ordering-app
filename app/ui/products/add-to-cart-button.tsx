@@ -24,6 +24,7 @@ export default function AddToCartButton({ product }: { product: Product }) {
   return (
     <div className="flex justify-center">
       <button
+        data-testid="add-button"
         onClick={handleClick}
         className="bg-slate-600 px-4 py-2 rounded-full font-bold"
       >
