@@ -9,7 +9,7 @@ export async function getAllProducts() {
     );
     return await response.json();
   } catch (error) {
-    throw new Error(`Failed to getAllProducts`);
+    throw new Error("Failed to getAllProducts", error as Error);
   }
 }
 
@@ -18,6 +18,6 @@ export async function getProductById(id: string) {
     const { products } = await getAllProducts();
     return products.find((product: Product) => id === product.id);
   } catch (error) {
-    throw new Error(`Failed to getProductById`);
+    throw new Error("Failed to getProductById", error as Error);
   }
 }

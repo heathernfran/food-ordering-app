@@ -50,7 +50,7 @@ function cartReducer(state: CartState, action: CartAction) {
         totalQuantity: nextTotalQuantity,
       };
     default:
-      throw Error(`Unknown action: ${action}`);
+      throw Error("Unknown action", action);
   }
 }
 
