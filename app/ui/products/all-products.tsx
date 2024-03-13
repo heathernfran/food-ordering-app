@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { useState } from 'react'
-import type { Product } from '@/app/lib/definitions'
-import { formatCurrency } from '@/app/lib/utils'
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import type { Product } from "@/app/lib/definitions";
+import { formatCurrency } from "@/app/lib/utils";
 
 export default function AllProducts({ products }: { products: Product[] }) {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
-    console.log({ searchTerm })
-  }
+    setSearchTerm(e.target.value);
+    console.log({ searchTerm });
+  };
 
   return (
     <>
@@ -28,7 +28,7 @@ export default function AllProducts({ products }: { products: Product[] }) {
                   src={product.image}
                   width={400}
                   height={300}
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: "cover" }}
                   className="rounded-t-lg w-[400px] h-[300px]"
                 />
               </div>
@@ -39,5 +39,5 @@ export default function AllProducts({ products }: { products: Product[] }) {
           </div>
         ))}
     </>
-  )
+  );
 }
