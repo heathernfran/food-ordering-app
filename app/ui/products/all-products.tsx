@@ -15,7 +15,7 @@ export default function AllProducts({ products }: { products: Product[] }) {
       clearTimeout(timeoutId);
     }
     timeoutId = setTimeout(() => {
-      const nextSearchTerm = e.target.value;
+      const nextSearchTerm = e.target.value.toLowerCase();
       setSearchTerm(nextSearchTerm);
     }, 500);
   };
@@ -25,7 +25,9 @@ export default function AllProducts({ products }: { products: Product[] }) {
       <input onChange={handleChange} />
       <div className="grid gap-4 grid-template-columns">
         {products
-          .filter((product: Product) => product.name.includes(searchTerm))
+          .filter((product: Product) =>
+            product.name.toLowerCase().includes(searchTerm)
+          )
           .map((product: Product) => (
             <div key={product.id} className="rounded-lg bg-slate-800">
               <Link href={`/products/${product.id}`}>
