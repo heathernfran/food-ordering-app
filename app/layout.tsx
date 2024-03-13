@@ -5,6 +5,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import TopNav from "@/app/ui/top-nav";
 import CartProvider from "@/app/context/cart";
 import ToastProvider from "@/app/context/toast";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +27,8 @@ export default function RootLayout({
           <CartProvider>
             <TopNav />
             <div className="mx-10">{children}</div>
+            <Analytics />
+            <SpeedInsights />
           </CartProvider>
         </ToastProvider>
       </body>
