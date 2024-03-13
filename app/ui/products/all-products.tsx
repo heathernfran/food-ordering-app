@@ -8,15 +8,21 @@ import { formatCurrency } from "@/app/lib/utils";
 
 export default function AllProducts({ products }: { products: Product[] }) {
   const [searchTerm, setSearchTerm] = useState("");
+  let timeoutId: NodeJS.Timeout;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    console.log({ searchTerm });
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      const nextSearchTerm = e.target.value;
+      setSearchTerm(nextSearchTerm);
+    }, 500);
   };
 
   return (
     <>
-      <input onChange={handleChange} value={searchTerm} />
+      <input onChange={handleChange} />
       <div className="grid gap-4 grid-template-columns">
         {products
           .filter((product: Product) => product.name.includes(searchTerm))
