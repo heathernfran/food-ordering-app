@@ -1,9 +1,49 @@
 const { db } = require("@vercel/postgres");
+const { products } = require("./data.js");
+
+async function seedProducts(client) {
+  try {
+    await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+    const createTable = await client.sql`
+        CREATE TABLE IF NOT EXISTS products (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        price INT NOT NULL,
+        image VARCHAR(255) NOT NULL,
+        description VARCHAR(255) NOT NULL,
+        calorie INT NOT NULL
+      );
+    `;
+
+    console.log(`Created "invoices" table`);
+
+    const insertedProducts = await Promise.all(
+      products.map(
+        (product) => client.sql`
+        INSERT INTO products (name, price, image, description, calorie)
+        VALUES (${product.name}, ${product.price}, ${product.image}, ${product.description}, ${product.calorie})
+        ON CONFLICT (id) DO NOTHING
+      `
+      )
+    );
+
+    console.log(`Seeded ${insertedProducts.length} products`);
+
+    return {
+      createTable,
+      products: insertedProducts,
+    };
+  } catch (error) {
+    console.error("Error seeding products:", error);
+    throw error;
+  }
+}
 
 async function main() {
   const client = await db.connect();
 
-  console.log("seed data");
+  await seedProducts(client);
 
   await client.end();
 }
