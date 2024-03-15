@@ -12,11 +12,11 @@ export async function getAllProducts() {
   }
 }
 
-export async function getProductById(id: string) {
+export async function getProductById(slug: string) {
   try {
     const data = await sql<Product>`
       SELECT * FROM products
-      WHERE id = ${id}
+      WHERE slug = ${slug}
     `;
     return data.rows[0];
   } catch (error) {

@@ -6,13 +6,14 @@ async function seedProducts(client) {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
     const createTable = await client.sql`
-        CREATE TABLE IF NOT EXISTS products (
+      CREATE TABLE IF NOT EXISTS products (
         id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         price INT NOT NULL,
         image VARCHAR(255) NOT NULL,
         description VARCHAR(255) NOT NULL,
-        calorie INT NOT NULL
+        calorie INT NOT NULL,
+        slug VARCHAR(255) NOT NULL
       );
     `;
 
@@ -21,8 +22,8 @@ async function seedProducts(client) {
     const insertedProducts = await Promise.all(
       products.map(
         (product) => client.sql`
-        INSERT INTO products (name, price, image, description, calorie)
-        VALUES (${product.name}, ${product.price}, ${product.image}, ${product.description}, ${product.calorie})
+        INSERT INTO products (name, price, image, description, calorie, slug)
+        VALUES (${product.name}, ${product.price}, ${product.image}, ${product.description}, ${product.calorie}, ${product.slug})
         ON CONFLICT (id) DO NOTHING
       `
       )

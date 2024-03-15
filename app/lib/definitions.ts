@@ -5,6 +5,7 @@ export type Product = {
   image: string;
   description: string;
   calorie: number;
+  slug: string;
 };
 
 export type NewProduct = {

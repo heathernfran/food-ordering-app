@@ -30,7 +30,7 @@ export default function AllProducts({ products }: { products: Product[] }) {
           )
           .map((product: Product) => (
             <div key={product.id} className="rounded-lg bg-slate-800">
-              <Link href={`/products/${product.id}`}>
+              <Link href={`/products/${product.slug}`}>
                 <div className="">
                   <Image
                     alt={product.name}
