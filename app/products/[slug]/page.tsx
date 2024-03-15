@@ -1,15 +1,15 @@
 import Image from "next/image";
-import { getProductById } from "@/app/lib/actions";
+import { getProductBySlug } from "@/app/lib/actions";
 import AddToCartButton from "@/app/ui/products/add-to-cart-button";
 import BackButton from "@/app/ui/products/back-button";
 import { formatCurrency } from "@/app/lib/utils";
 
 export default async function Page({
-  params: { id },
+  params: { slug },
 }: {
-  params: { id: string };
+  params: { slug: string };
 }) {
-  const product = await getProductById(id);
+  const product = await getProductBySlug(slug);
 
   return (
     <div>
