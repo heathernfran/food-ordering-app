@@ -16,7 +16,7 @@ async function seedProducts(client) {
       );
     `;
 
-    console.log(`Created "invoices" table`);
+    console.log(`Created "products" table`);
 
     const insertedProducts = await Promise.all(
       products.map(
